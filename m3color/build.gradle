@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.kyant'
-version = '2023.5.3'
+version = '2023.5.4'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
