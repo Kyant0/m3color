@@ -3,7 +3,4 @@ jdk:
 before_install:
   - sdk install java 17.0.2-open
   - sdk use java 17.0.2-open
-  - sdk install maven
-  - mvn -v
-install:
-  - mvn install -Dmaven.javadoc.skip=true -DskipTests
+

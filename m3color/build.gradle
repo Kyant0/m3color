@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.kyant'
-version = '2023.5.9'
+version = '2023.5.10'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -17,13 +17,15 @@ dependencies {
     implementation('com.google.errorprone:error_prone_annotations:2.18.0')
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'com.kyant'
-            artifactId = 'm3color'
-            version = '2023.5.9'
-            from components.java
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = 'com.kyant'
+                artifactId = 'm3color'
+                version = '2023.5.10'
+                from components.java
+            }
         }
     }
 }
