@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="m3color:test" external.linked.project.path="$MODULE_DIR$/../../m3color" external.root.project.path="$MODULE_DIR$/../../m3color" external.system.id="GRADLE" external.system.module.group="com.kyant" external.system.module.type="sourceSet" external.system.module.version="2023.5.1" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output-test url="file://$MODULE_DIR$/../../m3color/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../m3color/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../m3color/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../m3color/src/test/resources" type="java-test-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="m3color.main" />
+    <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.18.0" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="m3color.main" />
+</module>
