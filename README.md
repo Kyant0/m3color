@@ -4,6 +4,8 @@ A Java library of https://github.com/material-foundation/material-color-utilitie
 
 ## Add to project
 
+[![JitPack Release](https://jitpack.io/v/Kyant0/m3color.svg)](https://jitpack.io/#Kyant0/m3color)
+
 ```kotlin
 allprojects {
     repositories {
