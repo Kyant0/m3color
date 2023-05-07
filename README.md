@@ -14,7 +14,7 @@ allprojects {
 implementation("com.github.Kyant0:m3color:2023.5.11")
 ```
 
-## Usage
+## Use with Compose M3
 
 Theme.kt
 ```kotlin
