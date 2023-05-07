@@ -2,7 +2,7 @@
 
 A Java library of https://github.com/material-foundation/material-color-utilities
 
-## Add in project
+## Add to project
 
 ```kotlin
 allprojects {
