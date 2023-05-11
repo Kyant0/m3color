@@ -137,3 +137,16 @@ fun dynamicColorScheme(
     }
 }
 ```
+
+PaletteStyle.kt
+```kotlin
+enum class PaletteStyle {
+    TonalSpot,
+    Neutral,
+    Vibrant,
+    Expressive,
+    Monochrome,
+    Fidelity,
+    Content
+}
+```
