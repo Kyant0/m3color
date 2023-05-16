@@ -38,8 +38,6 @@ MaterialTheme(
 ThemeExt.kt
 ```kotlin
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.kyant.m3color.dynamiccolor.MaterialDynamicColors
