@@ -13,7 +13,7 @@ allprojects {
     }
 }
 
-implementation("com.github.Kyant0:m3color:2023.5.13")
+implementation("com.github.Kyant0:m3color:2023.5.14")
 ```
 
 ## Use with Compose M3
@@ -93,11 +93,11 @@ fun dynamicColorScheme(
             outlineVariant = Color(colors.outlineVariant().getArgb(scheme)),
             primary = Color(colors.primary().getArgb(scheme)),
             primaryContainer = Color(colors.primaryContainer().getArgb(scheme)),
-            scrim = Color.Black,
+            scrim = Color(colors.scrim().getArgb(scheme)),
             secondary = Color(colors.secondary().getArgb(scheme)),
             secondaryContainer = Color(colors.secondaryContainer().getArgb(scheme)),
             surface = Color(colors.surface().getArgb(scheme)),
-            surfaceTint = Color(colors.primary().getArgb(scheme)),
+            surfaceTint = Color(colors.surfaceTint().getArgb(scheme)),
             surfaceVariant = Color(colors.surfaceVariant().getArgb(scheme)),
             tertiary = Color(colors.tertiary().getArgb(scheme)),
             tertiaryContainer = Color(colors.tertiaryContainer().getArgb(scheme))
@@ -125,11 +125,11 @@ fun dynamicColorScheme(
             outlineVariant = Color(colors.outlineVariant().getArgb(scheme)),
             primary = Color(colors.primary().getArgb(scheme)),
             primaryContainer = Color(colors.primaryContainer().getArgb(scheme)),
-            scrim = Color.Black,
+            scrim = Color(colors.scrim().getArgb(scheme)),
             secondary = Color(colors.secondary().getArgb(scheme)),
             secondaryContainer = Color(colors.secondaryContainer().getArgb(scheme)),
             surface = Color(colors.surface().getArgb(scheme)),
-            surfaceTint = Color(colors.primary().getArgb(scheme)),
+            surfaceTint = Color(colors.surfaceTint().getArgb(scheme)),
             surfaceVariant = Color(colors.surfaceVariant().getArgb(scheme)),
             tertiary = Color(colors.tertiary().getArgb(scheme)),
             tertiaryContainer = Color(colors.tertiaryContainer().getArgb(scheme))

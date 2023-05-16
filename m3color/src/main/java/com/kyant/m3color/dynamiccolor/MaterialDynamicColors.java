@@ -38,57 +38,6 @@ public final class MaterialDynamicColors {
     public MaterialDynamicColors() {
     }
 
-    private static ViewingConditions viewingConditionsForAlbers(DynamicScheme scheme) {
-        return ViewingConditions.defaultWithBackgroundLstar(scheme.isDark ? 30.0 : 80.0);
-    }
-
-    private static boolean isFidelity(DynamicScheme scheme) {
-        return scheme.variant == Variant.FIDELITY || scheme.variant == Variant.CONTENT;
-    }
-
-    private static boolean isMonochrome(DynamicScheme scheme) {
-        return scheme.variant == Variant.MONOCHROME;
-    }
-
-    static double findDesiredChromaByTone(
-            double hue, double chroma, double tone, boolean byDecreasingTone) {
-        double answer = tone;
-
-        Hct closestToChroma = Hct.from(hue, chroma, tone);
-        if (closestToChroma.getChroma() < chroma) {
-            double chromaPeak = closestToChroma.getChroma();
-            while (closestToChroma.getChroma() < chroma) {
-                answer += byDecreasingTone ? -1.0 : 1.0;
-                Hct potentialSolution = Hct.from(hue, chroma, answer);
-                if (chromaPeak > potentialSolution.getChroma()) {
-                    break;
-                }
-                if (Math.abs(potentialSolution.getChroma() - chroma) < 0.4) {
-                    break;
-                }
-
-                double potentialDelta = Math.abs(potentialSolution.getChroma() - chroma);
-                double currentDelta = Math.abs(closestToChroma.getChroma() - chroma);
-                if (potentialDelta < currentDelta) {
-                    closestToChroma = potentialSolution;
-                }
-                chromaPeak = Math.max(chromaPeak, potentialSolution.getChroma());
-            }
-        }
-
-        return answer;
-    }
-
-    static double performAlbers(Hct prealbers, DynamicScheme scheme) {
-        final Hct albersd = prealbers.inViewingConditions(viewingConditionsForAlbers(scheme));
-        if (DynamicColor.tonePrefersLightForeground(prealbers.getTone())
-                && !DynamicColor.toneAllowsLightForeground(albersd.getTone())) {
-            return DynamicColor.enableLightForeground(prealbers.getTone());
-        } else {
-            return DynamicColor.enableLightForeground(albersd.getTone());
-        }
-    }
-
     @NonNull
     public DynamicColor highestSurface(@NonNull DynamicScheme s) {
         return s.isDark ? surfaceBright() : surfaceDim();
@@ -176,13 +125,28 @@ public final class MaterialDynamicColors {
     @NonNull
     public DynamicColor outline() {
         return DynamicColor.fromPalette(
-                (s) -> s.neutralVariantPalette, (s) -> 50.0, this::highestSurface);
+                (s) -> s.neutralVariantPalette, (s) -> s.isDark ? 60.0 : 50.0, this::highestSurface);
     }
 
     @NonNull
     public DynamicColor outlineVariant() {
         return DynamicColor.fromPalette(
                 (s) -> s.neutralVariantPalette, (s) -> s.isDark ? 30.0 : 80.0, this::highestSurface);
+    }
+
+    @NonNull
+    public DynamicColor shadow() {
+        return DynamicColor.fromPalette((s) -> s.neutralPalette, (s) -> 0.0);
+    }
+
+    @NonNull
+    public DynamicColor scrim() {
+        return DynamicColor.fromPalette((s) -> s.neutralPalette, (s) -> 0.0);
+    }
+
+    @NonNull
+    public DynamicColor surfaceTint() {
+        return DynamicColor.fromPalette((s) -> s.primaryPalette, (s) -> s.isDark ? 80.0 : 40.0);
     }
 
     @NonNull
@@ -596,5 +560,56 @@ public final class MaterialDynamicColors {
     @NonNull
     public DynamicColor textHintInverse() {
         return DynamicColor.fromPalette((s) -> s.neutralPalette, (s) -> s.isDark ? 10.0 : 90.0);
+    }
+
+    private static ViewingConditions viewingConditionsForAlbers(DynamicScheme scheme) {
+        return ViewingConditions.defaultWithBackgroundLstar(scheme.isDark ? 30.0 : 80.0);
+    }
+
+    private static boolean isFidelity(DynamicScheme scheme) {
+        return scheme.variant == Variant.FIDELITY || scheme.variant == Variant.CONTENT;
+    }
+
+    private static boolean isMonochrome(DynamicScheme scheme) {
+        return scheme.variant == Variant.MONOCHROME;
+    }
+
+    static double findDesiredChromaByTone(
+            double hue, double chroma, double tone, boolean byDecreasingTone) {
+        double answer = tone;
+
+        Hct closestToChroma = Hct.from(hue, chroma, tone);
+        if (closestToChroma.getChroma() < chroma) {
+            double chromaPeak = closestToChroma.getChroma();
+            while (closestToChroma.getChroma() < chroma) {
+                answer += byDecreasingTone ? -1.0 : 1.0;
+                Hct potentialSolution = Hct.from(hue, chroma, answer);
+                if (chromaPeak > potentialSolution.getChroma()) {
+                    break;
+                }
+                if (Math.abs(potentialSolution.getChroma() - chroma) < 0.4) {
+                    break;
+                }
+
+                double potentialDelta = Math.abs(potentialSolution.getChroma() - chroma);
+                double currentDelta = Math.abs(closestToChroma.getChroma() - chroma);
+                if (potentialDelta < currentDelta) {
+                    closestToChroma = potentialSolution;
+                }
+                chromaPeak = Math.max(chromaPeak, potentialSolution.getChroma());
+            }
+        }
+
+        return answer;
+    }
+
+    static double performAlbers(Hct prealbers, DynamicScheme scheme) {
+        final Hct albersd = prealbers.inViewingConditions(viewingConditionsForAlbers(scheme));
+        if (DynamicColor.tonePrefersLightForeground(prealbers.getTone())
+                && !DynamicColor.toneAllowsLightForeground(albersd.getTone())) {
+            return DynamicColor.enableLightForeground(prealbers.getTone());
+        } else {
+            return DynamicColor.enableLightForeground(albersd.getTone());
+        }
     }
 }
