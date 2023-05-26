@@ -13,12 +13,12 @@ allprojects {
     }
 }
 
-implementation("com.github.Kyant0:m3color:2023.5.14")
+implementation("com.github.Kyant0:m3color:2023.5.15")
 ```
 
 ## Use with Compose M3
 
-Theme.kt
+```AppTheme``` function in Theme.kt
 ```kotlin
 val keyColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
     colorResource(id = android.R.color.system_accent1_500)
