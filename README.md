@@ -45,8 +45,10 @@ import com.kyant.m3color.hct.Hct
 import com.kyant.m3color.scheme.SchemeContent
 import com.kyant.m3color.scheme.SchemeExpressive
 import com.kyant.m3color.scheme.SchemeFidelity
+import com.kyant.m3color.scheme.SchemeFruitSalad
 import com.kyant.m3color.scheme.SchemeMonochrome
 import com.kyant.m3color.scheme.SchemeNeutral
+import com.kyant.m3color.scheme.SchemeRainbow
 import com.kyant.m3color.scheme.SchemeTonalSpot
 import com.kyant.m3color.scheme.SchemeVibrant
 
@@ -63,6 +65,8 @@ fun dynamicColorScheme(
         PaletteStyle.Neutral -> SchemeNeutral(hct, isDark, contrastLevel)
         PaletteStyle.Vibrant -> SchemeVibrant(hct, isDark, contrastLevel)
         PaletteStyle.Expressive -> SchemeExpressive(hct, isDark, contrastLevel)
+        PaletteStyle.Rainbow -> SchemeRainbow(hct, isDark, contrast)
+        PaletteStyle.FruitSalad -> SchemeFruitSalad(hct, isDark, contrast)
         PaletteStyle.Monochrome -> SchemeMonochrome(hct, isDark, contrastLevel)
         PaletteStyle.Fidelity -> SchemeFidelity(hct, isDark, contrastLevel)
         PaletteStyle.Content -> SchemeContent(hct, isDark, contrastLevel)
@@ -109,6 +113,8 @@ enum class PaletteStyle {
     Neutral,
     Vibrant,
     Expressive,
+    Rainbow,
+    FruitSalad,
     Monochrome,
     Fidelity,
     Content
