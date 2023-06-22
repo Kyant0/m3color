@@ -16,13 +16,11 @@
 
 package com.kyant.m3color.quantize;
 
-/**
- * An interface to allow use of different color spaces by quantizers.
- */
+/** An interface to allow use of different color spaces by quantizers. */
 public interface PointProvider {
-    double[] fromInt(int argb);
+  public double[] fromInt(int argb);
 
-    int toInt(double[] point);
+  public int toInt(double[] point);
 
-    double distance(double[] a, double[] b);
+  public double distance(double[] a, double[] b);
 }

@@ -19,20 +19,18 @@ package com.kyant.m3color.scheme;
 import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
 
-/**
- * A monochrome theme, colors are purely black / white / gray.
- */
+/** A monochrome theme, colors are purely black / white / gray. */
 public class SchemeMonochrome extends DynamicScheme {
-    public SchemeMonochrome(Hct sourceColorHct, boolean isDark, double contrastLevel) {
-        super(
-                sourceColorHct,
-                Variant.MONOCHROME,
-                isDark,
-                contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
-    }
+  public SchemeMonochrome(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+    super(
+        sourceColorHct,
+        Variant.MONOCHROME,
+        isDark,
+        contrastLevel,
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
+  }
 }

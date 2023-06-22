@@ -16,10 +16,10 @@
 
 package com.kyant.m3color.scheme;
 
-import com.kyant.m3color.dislike.DislikeAnalyzer;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.palettes.TonalPalette;
 import com.kyant.m3color.temperature.TemperatureCache;
+import com.kyant.m3color.dislike.DislikeAnalyzer;
+import com.kyant.m3color.palettes.TonalPalette;
 
 /**
  * A scheme that places the source color in Scheme.primaryContainer.
@@ -32,20 +32,20 @@ import com.kyant.m3color.temperature.TemperatureCache;
  * maintains constant appearance.
  */
 public class SchemeFidelity extends DynamicScheme {
-    public SchemeFidelity(Hct sourceColorHct, boolean isDark, double contrastLevel) {
-        super(
-                sourceColorHct,
-                Variant.FIDELITY,
-                isDark,
-                contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma()),
-                TonalPalette.fromHueAndChroma(
-                        sourceColorHct.getHue(),
-                        Math.max(sourceColorHct.getChroma() - 32.0, sourceColorHct.getChroma() * 0.5)),
-                TonalPalette.fromHct(
-                        DislikeAnalyzer.fixIfDisliked(new TemperatureCache(sourceColorHct).getComplement())),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma() / 8.0),
-                TonalPalette.fromHueAndChroma(
-                        sourceColorHct.getHue(), (sourceColorHct.getChroma() / 8.0) + 4.0));
-    }
+  public SchemeFidelity(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+    super(
+        sourceColorHct,
+        Variant.FIDELITY,
+        isDark,
+        contrastLevel,
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma()),
+        TonalPalette.fromHueAndChroma(
+            sourceColorHct.getHue(),
+            Math.max(sourceColorHct.getChroma() - 32.0, sourceColorHct.getChroma() * 0.5)),
+        TonalPalette.fromHct(
+            DislikeAnalyzer.fixIfDisliked(new TemperatureCache(sourceColorHct).getComplement())),
+        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma() / 8.0),
+        TonalPalette.fromHueAndChroma(
+            sourceColorHct.getHue(), (sourceColorHct.getChroma() / 8.0) + 4.0));
+  }
 }
