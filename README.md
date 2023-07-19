@@ -13,7 +13,7 @@ allprojects {
     }
 }
 
-implementation("com.github.Kyant0:m3color:2023.6.2")
+implementation("com.github.Kyant0:m3color:2023.7.1")
 ```
 
 ## Use with Compose M3
@@ -72,7 +72,7 @@ fun dynamicColorScheme(
         PaletteStyle.Content -> SchemeContent(hct, isDark, contrastLevel)
     }
 
-    return return ColorScheme(
+    return ColorScheme(
         background = Color(colors.background().getArgb(scheme)),
         error = Color(colors.error().getArgb(scheme)),
         errorContainer = Color(colors.errorContainer().getArgb(scheme)),

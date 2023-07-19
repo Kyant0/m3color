@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.kyant'
-version = '2023.6.2'
+version = '2023.7.1'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -25,7 +25,7 @@ afterEvaluate {
             maven(MavenPublication) {
                 groupId = 'com.kyant'
                 artifactId = 'm3color'
-                version = '2023.6.2'
+                version = '2023.7.1'
                 from components.java
             }
         }
