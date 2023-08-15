@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.kyant'
-version = '2023.7.1'
+version = '2023.8.1'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation('androidx.annotation:annotation:1.7.0-alpha02')
+    implementation('androidx.annotation:annotation:1.7.0-beta01')
     implementation('com.google.errorprone:error_prone_annotations:2.18.0')
 }
 
@@ -25,7 +25,7 @@ afterEvaluate {
             maven(MavenPublication) {
                 groupId = 'com.kyant'
                 artifactId = 'm3color'
-                version = '2023.7.1'
+                version = '2023.8.1'
                 from components.java
             }
         }
