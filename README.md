@@ -38,6 +38,7 @@ MaterialTheme(
 ThemeExt.kt
 ```kotlin
 import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.kyant.m3color.dynamiccolor.MaterialDynamicColors
@@ -52,6 +53,7 @@ import com.kyant.m3color.scheme.SchemeRainbow
 import com.kyant.m3color.scheme.SchemeTonalSpot
 import com.kyant.m3color.scheme.SchemeVibrant
 
+@Stable
 fun dynamicColorScheme(
     keyColor: Color,
     isDark: Boolean,
@@ -59,7 +61,6 @@ fun dynamicColorScheme(
     contrastLevel: Double = 0.0
 ): ColorScheme {
     val hct = Hct.fromInt(keyColor.toArgb())
-    val colors = MaterialDynamicColors()
     val scheme = when (style) {
         PaletteStyle.TonalSpot -> SchemeTonalSpot(hct, isDark, contrastLevel)
         PaletteStyle.Neutral -> SchemeNeutral(hct, isDark, contrastLevel)
@@ -73,37 +74,47 @@ fun dynamicColorScheme(
     }
 
     return ColorScheme(
-        background = Color(colors.background().getArgb(scheme)),
-        error = Color(colors.error().getArgb(scheme)),
-        errorContainer = Color(colors.errorContainer().getArgb(scheme)),
-        inverseOnSurface = Color(colors.inverseOnSurface().getArgb(scheme)),
-        inversePrimary = Color(colors.inversePrimary().getArgb(scheme)),
-        inverseSurface = Color(colors.inverseSurface().getArgb(scheme)),
-        onBackground = Color(colors.onBackground().getArgb(scheme)),
-        onError = Color(colors.onError().getArgb(scheme)),
-        onErrorContainer = Color(colors.onErrorContainer().getArgb(scheme)),
-        onPrimary = Color(colors.onPrimary().getArgb(scheme)),
-        onPrimaryContainer = Color(colors.onPrimaryContainer().getArgb(scheme)),
-        onSecondary = Color(colors.onSecondary().getArgb(scheme)),
-        onSecondaryContainer = Color(colors.onSecondaryContainer().getArgb(scheme)),
-        onSurface = Color(colors.onSurface().getArgb(scheme)),
-        onSurfaceVariant = Color(colors.onSurfaceVariant().getArgb(scheme)),
-        onTertiary = Color(colors.onTertiary().getArgb(scheme)),
-        onTertiaryContainer = Color(colors.onTertiaryContainer().getArgb(scheme)),
-        outline = Color(colors.outline().getArgb(scheme)),
-        outlineVariant = Color(colors.outlineVariant().getArgb(scheme)),
-        primary = Color(colors.primary().getArgb(scheme)),
-        primaryContainer = Color(colors.primaryContainer().getArgb(scheme)),
-        scrim = Color(colors.scrim().getArgb(scheme)),
-        secondary = Color(colors.secondary().getArgb(scheme)),
-        secondaryContainer = Color(colors.secondaryContainer().getArgb(scheme)),
-        surface = Color(colors.surface().getArgb(scheme)),
-        surfaceTint = Color(colors.surfaceTint().getArgb(scheme)),
-        surfaceVariant = Color(colors.surfaceVariant().getArgb(scheme)),
-        tertiary = Color(colors.tertiary().getArgb(scheme)),
-        tertiaryContainer = Color(colors.tertiaryContainer().getArgb(scheme))
+        background = scheme.background.toColor(),
+        error = scheme.error.toColor(),
+        errorContainer = scheme.errorContainer.toColor(),
+        inverseOnSurface = scheme.inverseOnSurface.toColor(),
+        inversePrimary = scheme.inversePrimary.toColor(),
+        inverseSurface = scheme.inverseSurface.toColor(),
+        onBackground = scheme.onBackground.toColor(),
+        onError = scheme.onError.toColor(),
+        onErrorContainer = scheme.onErrorContainer.toColor(),
+        onPrimary = scheme.onPrimary.toColor(),
+        onPrimaryContainer = scheme.onPrimaryContainer.toColor(),
+        onSecondary = scheme.onSecondary.toColor(),
+        onSecondaryContainer = scheme.onSecondaryContainer.toColor(),
+        onSurface = scheme.onSurface.toColor(),
+        onSurfaceVariant = scheme.onSurfaceVariant.toColor(),
+        onTertiary = scheme.onTertiary.toColor(),
+        onTertiaryContainer = scheme.onTertiaryContainer.toColor(),
+        outline = scheme.outline.toColor(),
+        outlineVariant = scheme.outlineVariant.toColor(),
+        primary = scheme.primary.toColor(),
+        primaryContainer = scheme.primaryContainer.toColor(),
+        scrim = scheme.scrim.toColor(),
+        secondary = scheme.secondary.toColor(),
+        secondaryContainer = scheme.secondaryContainer.toColor(),
+        surface = scheme.surface.toColor(),
+        surfaceBright = scheme.surfaceBright.toColor(),
+        surfaceContainer = scheme.surfaceContainer.toColor(),
+        surfaceContainerLow = scheme.surfaceContainerLow.toColor(),
+        surfaceContainerLowest = scheme.surfaceContainerLowest.toColor(),
+        surfaceContainerHigh = scheme.surfaceContainerHigh.toColor(),
+        surfaceContainerHighest = scheme.surfaceContainerHighest.toColor(),
+        surfaceDim = scheme.surfaceDim.toColor(),
+        surfaceTint = scheme.surfaceTint.toColor(),
+        surfaceVariant = scheme.surfaceVariant.toColor(),
+        tertiary = scheme.tertiary.toColor(),
+        tertiaryContainer = scheme.tertiaryContainer.toColor(),
     )
 }
+
+@Suppress("NOTHING_TO_INLINE")
+private inline fun Int.toColor(): Color = Color(this)
 ```
 
 PaletteStyle.kt
