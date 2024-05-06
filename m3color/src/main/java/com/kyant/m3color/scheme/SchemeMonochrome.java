@@ -16,6 +16,8 @@
 
 package com.kyant.m3color.scheme;
 
+import com.kyant.m3color.dynamiccolor.DynamicScheme;
+import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
 

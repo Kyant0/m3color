@@ -25,7 +25,6 @@ import com.google.errorprone.annotations.Var;
 import com.kyant.m3color.contrast.Contrast;
 import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
-import com.kyant.m3color.scheme.DynamicScheme;
 import com.kyant.m3color.utils.MathUtils;
 import java.util.ArrayList;
 import java.util.HashMap;

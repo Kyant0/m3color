@@ -19,8 +19,6 @@ package com.kyant.m3color.dynamiccolor;
 import androidx.annotation.NonNull;
 import com.kyant.m3color.dislike.DislikeAnalyzer;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.scheme.DynamicScheme;
-import com.kyant.m3color.scheme.Variant;
 
 /** Named colors, otherwise known as tokens, or roles, in the Material Design system. */
 // Prevent lint for Function.apply not being available on Android before API level 14 (4.0.1).

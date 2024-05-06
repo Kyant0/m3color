@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.kyant.m3color.scheme;
+package com.kyant.m3color.dynamiccolor;
 
 /** Themes for Dynamic Color. */
 public enum Variant {

@@ -16,9 +16,11 @@
 
 package com.kyant.m3color.scheme;
 
+import com.kyant.m3color.dynamiccolor.DynamicScheme;
+import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.utils.MathUtils;
 import com.kyant.m3color.palettes.TonalPalette;
+import com.kyant.m3color.utils.MathUtils;
 
 /** A playful theme - the source color's hue does not appear in the theme. */
 public class SchemeExpressive extends DynamicScheme {

@@ -18,10 +18,12 @@ package com.kyant.m3color.scheme;
 
 import static java.lang.Math.max;
 
-import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.temperature.TemperatureCache;
 import com.kyant.m3color.dislike.DislikeAnalyzer;
+import com.kyant.m3color.dynamiccolor.DynamicScheme;
+import com.kyant.m3color.dynamiccolor.Variant;
+import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
+import com.kyant.m3color.temperature.TemperatureCache;
 
 /**
  * A scheme that places the source color in Scheme.primaryContainer.
