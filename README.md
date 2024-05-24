@@ -21,7 +21,7 @@ implementation("com.github.Kyant0:m3color:2024.3")
 ```AppTheme``` function in Theme.kt
 ```kotlin
 val keyColor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-    colorResource(id = android.R.color.system_accent1_400)
+    colorResource(id = android.R.color.system_accent1_500)
 } else {
     Color(0xFF007FAC)
 }
