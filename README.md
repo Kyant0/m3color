@@ -13,7 +13,7 @@ allprojects {
     }
 }
 
-implementation("com.github.Kyant0:m3color:2024.3")
+implementation("com.github.Kyant0:m3color:2024.4")
 ```
 
 ## Use with Compose M3
