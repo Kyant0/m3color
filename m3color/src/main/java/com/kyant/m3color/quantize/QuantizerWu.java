@@ -17,7 +17,6 @@
 package com.kyant.m3color.quantize;
 
 import com.kyant.m3color.utils.ColorUtils;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -22,8 +22,8 @@ import static java.lang.Math.min;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.errorprone.annotations.Var;
-import com.kyant.m3color.contrast.Contrast;
 import com.kyant.m3color.hct.Hct;
+import com.kyant.m3color.contrast.Contrast;
 import com.kyant.m3color.palettes.TonalPalette;
 import com.kyant.m3color.utils.MathUtils;
 import java.util.ArrayList;
@@ -99,14 +99,14 @@ public final class DynamicColor {
    *     colors. One of them must be the color being constructed.
    */
   public DynamicColor(
-          @NonNull String name,
-          @NonNull Function<DynamicScheme, TonalPalette> palette,
-          @NonNull Function<DynamicScheme, Double> tone,
-          boolean isBackground,
-          @Nullable Function<DynamicScheme, DynamicColor> background,
-          @Nullable Function<DynamicScheme, DynamicColor> secondBackground,
-          @Nullable ContrastCurve contrastCurve,
-          @Nullable Function<DynamicScheme, ToneDeltaPair> toneDeltaPair) {
+      @NonNull String name,
+      @NonNull Function<DynamicScheme, TonalPalette> palette,
+      @NonNull Function<DynamicScheme, Double> tone,
+      boolean isBackground,
+      @Nullable Function<DynamicScheme, DynamicColor> background,
+      @Nullable Function<DynamicScheme, DynamicColor> secondBackground,
+      @Nullable ContrastCurve contrastCurve,
+      @Nullable Function<DynamicScheme, ToneDeltaPair> toneDeltaPair) {
 
     this.name = name;
     this.palette = palette;
@@ -150,15 +150,15 @@ public final class DynamicColor {
    * @param opacity A function returning the opacity of a color, as a number between 0 and 1.
    */
   public DynamicColor(
-          @NonNull String name,
-          @NonNull Function<DynamicScheme, TonalPalette> palette,
-          @NonNull Function<DynamicScheme, Double> tone,
-          boolean isBackground,
-          @Nullable Function<DynamicScheme, DynamicColor> background,
-          @Nullable Function<DynamicScheme, DynamicColor> secondBackground,
-          @Nullable ContrastCurve contrastCurve,
-          @Nullable Function<DynamicScheme, ToneDeltaPair> toneDeltaPair,
-          @Nullable Function<DynamicScheme, Double> opacity) {
+      @NonNull String name,
+      @NonNull Function<DynamicScheme, TonalPalette> palette,
+      @NonNull Function<DynamicScheme, Double> tone,
+      boolean isBackground,
+      @Nullable Function<DynamicScheme, DynamicColor> background,
+      @Nullable Function<DynamicScheme, DynamicColor> secondBackground,
+      @Nullable ContrastCurve contrastCurve,
+      @Nullable Function<DynamicScheme, ToneDeltaPair> toneDeltaPair,
+      @Nullable Function<DynamicScheme, Double> opacity) {
     this.name = name;
     this.palette = palette;
     this.tone = tone;
@@ -193,18 +193,18 @@ public final class DynamicColor {
    */
   @NonNull
   public static DynamicColor fromPalette(
-          @NonNull String name,
-          @NonNull Function<DynamicScheme, TonalPalette> palette,
-          @NonNull Function<DynamicScheme, Double> tone) {
+      @NonNull String name,
+      @NonNull Function<DynamicScheme, TonalPalette> palette,
+      @NonNull Function<DynamicScheme, Double> tone) {
     return new DynamicColor(
-            name,
-            palette,
-            tone,
-            /* isBackground= */ false,
-            /* background= */ null,
-            /* secondBackground= */ null,
-            /* contrastCurve= */ null,
-            /* toneDeltaPair= */ null);
+        name,
+        palette,
+        tone,
+        /* isBackground= */ false,
+        /* background= */ null,
+        /* secondBackground= */ null,
+        /* contrastCurve= */ null,
+        /* toneDeltaPair= */ null);
   }
 
   /**
@@ -232,19 +232,19 @@ public final class DynamicColor {
    */
   @NonNull
   public static DynamicColor fromPalette(
-          @NonNull String name,
-          @NonNull Function<DynamicScheme, TonalPalette> palette,
-          @NonNull Function<DynamicScheme, Double> tone,
-          boolean isBackground) {
+      @NonNull String name,
+      @NonNull Function<DynamicScheme, TonalPalette> palette,
+      @NonNull Function<DynamicScheme, Double> tone,
+      boolean isBackground) {
     return new DynamicColor(
-            name,
-            palette,
-            tone,
-            isBackground,
-            /* background= */ null,
-            /* secondBackground= */ null,
-            /* contrastCurve= */ null,
-            /* toneDeltaPair= */ null);
+        name,
+        palette,
+        tone,
+        isBackground,
+        /* background= */ null,
+        /* secondBackground= */ null,
+        /* contrastCurve= */ null,
+        /* toneDeltaPair= */ null);
   }
 
   /**
@@ -324,9 +324,9 @@ public final class DynamicColor {
       double bgTone = bg.getTone(scheme);
 
       boolean aIsNearer =
-              (polarity == TonePolarity.NEARER
-                      || (polarity == TonePolarity.LIGHTER && !scheme.isDark)
-                      || (polarity == TonePolarity.DARKER && scheme.isDark));
+          (polarity == TonePolarity.NEARER
+              || (polarity == TonePolarity.LIGHTER && !scheme.isDark)
+              || (polarity == TonePolarity.DARKER && scheme.isDark));
       DynamicColor nearer = aIsNearer ? roleA : roleB;
       DynamicColor farther = aIsNearer ? roleB : roleA;
       boolean amNearer = name.equals(nearer.name);
@@ -341,16 +341,16 @@ public final class DynamicColor {
       double nInitialTone = nearer.tone.apply(scheme);
       @Var
       double nTone =
-              Contrast.ratioOfTones(bgTone, nInitialTone) >= nContrast
-                      ? nInitialTone
-                      : DynamicColor.foregroundTone(bgTone, nContrast);
+          Contrast.ratioOfTones(bgTone, nInitialTone) >= nContrast
+              ? nInitialTone
+              : DynamicColor.foregroundTone(bgTone, nContrast);
       // Initial and adjusted tones for `farther`
       double fInitialTone = farther.tone.apply(scheme);
       @Var
       double fTone =
-              Contrast.ratioOfTones(bgTone, fInitialTone) >= fContrast
-                      ? fInitialTone
-                      : DynamicColor.foregroundTone(bgTone, fContrast);
+          Contrast.ratioOfTones(bgTone, fInitialTone) >= fContrast
+              ? fInitialTone
+              : DynamicColor.foregroundTone(bgTone, fContrast);
 
       if (decreasingContrast) {
         // If decreasing contrast, adjust color to the "bare minimum"
@@ -446,7 +446,7 @@ public final class DynamicColor {
         double lower = min(bgTone1, bgTone2);
 
         if (Contrast.ratioOfTones(upper, answer) >= desiredRatio
-                && Contrast.ratioOfTones(lower, answer) >= desiredRatio) {
+            && Contrast.ratioOfTones(lower, answer) >= desiredRatio) {
           return answer;
         }
 
@@ -468,8 +468,8 @@ public final class DynamicColor {
         }
 
         boolean prefersLight =
-                DynamicColor.tonePrefersLightForeground(bgTone1)
-                        || DynamicColor.tonePrefersLightForeground(bgTone2);
+            DynamicColor.tonePrefersLightForeground(bgTone1)
+                || DynamicColor.tonePrefersLightForeground(bgTone2);
         if (prefersLight) {
           return (lightOption == -1) ? 100 : lightOption;
         }
@@ -503,7 +503,7 @@ public final class DynamicColor {
       // high and max contrast in light mode. PC's standard tone was T90, OPC's was T10, it was
       // light mode, and the contrast level was 0.6568521221032331.
       boolean negligibleDifference =
-              Math.abs(lighterRatio - darkerRatio) < 0.1 && lighterRatio < ratio && darkerRatio < ratio;
+          Math.abs(lighterRatio - darkerRatio) < 0.1 && lighterRatio < ratio && darkerRatio < ratio;
       if (lighterRatio >= ratio || lighterRatio >= darkerRatio || negligibleDifference) {
         return lighterTone;
       } else {

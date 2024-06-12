@@ -18,6 +18,7 @@ package com.kyant.m3color.score;
 
 import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.utils.MathUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

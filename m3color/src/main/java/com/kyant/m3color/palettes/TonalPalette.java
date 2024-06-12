@@ -173,7 +173,7 @@ public final class TonalPalette {
     // Find the maximum chroma for a given tone
     private double maxChroma(int tone) {
       return chromaCache.computeIfAbsent(
-              tone, (Integer key) -> Hct.from(hue, MAX_CHROMA_VALUE, key).getChroma());
+          tone, (Integer key) -> Hct.from(hue, MAX_CHROMA_VALUE, key).getChroma());
     }
   }
 }
