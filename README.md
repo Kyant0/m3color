@@ -13,7 +13,7 @@ allprojects {
     }
 }
 
-implementation("com.github.Kyant0:m3color:2024.4")
+implementation("com.github.Kyant0:m3color:<version>")
 ```
 
 ## Use with Compose M3
@@ -128,6 +128,6 @@ enum class PaletteStyle {
     FruitSalad,
     Monochrome,
     Fidelity,
-    Content
+    Content,
 }
 ```

@@ -21,19 +21,21 @@ import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
 import com.kyant.m3color.utils.MathUtils;
 
-/** A playful theme - the source color's hue does not appear in the theme. */
+/**
+ * A playful theme - the source color's hue does not appear in the theme.
+ */
 public class SchemeRainbow extends DynamicScheme {
-  public SchemeRainbow(Hct sourceColorHct, boolean isDark, double contrastLevel) {
-    super(
-        sourceColorHct,
-        Variant.RAINBOW,
-        isDark,
-        contrastLevel,
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 48.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
-        TonalPalette.fromHueAndChroma(
-            MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 60.0), 24.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
-  }
+    public SchemeRainbow(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+        super(
+                sourceColorHct,
+                Variant.RAINBOW,
+                isDark,
+                contrastLevel,
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 48.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
+                TonalPalette.fromHueAndChroma(
+                        MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 60.0), 24.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
+    }
 }

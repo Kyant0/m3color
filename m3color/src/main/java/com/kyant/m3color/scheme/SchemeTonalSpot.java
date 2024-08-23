@@ -21,19 +21,21 @@ import com.kyant.m3color.hct.Hct;
 import com.kyant.m3color.palettes.TonalPalette;
 import com.kyant.m3color.utils.MathUtils;
 
-/** A calm theme, sedated colors that aren't particularly chromatic. */
+/**
+ * A calm theme, sedated colors that aren't particularly chromatic.
+ */
 public class SchemeTonalSpot extends DynamicScheme {
-  public SchemeTonalSpot(Hct sourceColorHct, boolean isDark, double contrastLevel) {
-    super(
-        sourceColorHct,
-        Variant.TONAL_SPOT,
-        isDark,
-        contrastLevel,
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 36.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
-        TonalPalette.fromHueAndChroma(
-            MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 60.0), 24.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 6.0),
-        TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 8.0));
-  }
+    public SchemeTonalSpot(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+        super(
+                sourceColorHct,
+                Variant.TONAL_SPOT,
+                isDark,
+                contrastLevel,
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 36.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
+                TonalPalette.fromHueAndChroma(
+                        MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 60.0), 24.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 6.0),
+                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 8.0));
+    }
 }

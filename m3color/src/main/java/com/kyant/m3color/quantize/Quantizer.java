@@ -17,5 +17,5 @@
 package com.kyant.m3color.quantize;
 
 interface Quantizer {
-  public QuantizerResult quantize(int[] pixels, int maxColors);
+    public QuantizerResult quantize(int[] pixels, int maxColors);
 }

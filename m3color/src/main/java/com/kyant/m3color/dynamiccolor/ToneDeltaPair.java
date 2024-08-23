@@ -27,77 +27,85 @@ import androidx.annotation.NonNull;
  * relationship or a contrast guarantee.
  */
 public final class ToneDeltaPair {
-  /** The first role in a pair. */
-  private final DynamicColor roleA;
+    /**
+     * The first role in a pair.
+     */
+    private final DynamicColor roleA;
 
-  /** The second role in a pair. */
-  private final DynamicColor roleB;
+    /**
+     * The second role in a pair.
+     */
+    private final DynamicColor roleB;
 
-  /** Required difference between tones. Absolute value, negative values have undefined behavior. */
-  private final double delta;
+    /**
+     * Required difference between tones. Absolute value, negative values have undefined behavior.
+     */
+    private final double delta;
 
-  /** The relative relation between tones of roleA and roleB, as described above. */
-  private final TonePolarity polarity;
+    /**
+     * The relative relation between tones of roleA and roleB, as described above.
+     */
+    private final TonePolarity polarity;
 
-  /**
-   * Whether these two roles should stay on the same side of the "awkward zone" (T50-59). This is
-   * necessary for certain cases where one role has two backgrounds.
-   */
-  private final boolean stayTogether;
+    /**
+     * Whether these two roles should stay on the same side of the "awkward zone" (T50-59). This is
+     * necessary for certain cases where one role has two backgrounds.
+     */
+    private final boolean stayTogether;
 
-  /**
-   * Documents a constraint in tone distance between two DynamicColors.
-   *
-   * <p>The polarity is an adjective that describes "A", compared to "B".
-   *
-   * <p>For instance, ToneDeltaPair(A, B, 15, 'darker', stayTogether) states that A's tone should be
-   * at least 15 darker than B's.
-   *
-   * <p>'nearer' and 'farther' describes closeness to the surface roles. For instance,
-   * ToneDeltaPair(A, B, 10, 'nearer', stayTogether) states that A should be 10 lighter than B in
-   * light mode, and 10 darker than B in dark mode.
-   *
-   * @param roleA The first role in a pair.
-   * @param roleB The second role in a pair.
-   * @param delta Required difference between tones. Absolute value, negative values have undefined
-   *     behavior.
-   * @param polarity The relative relation between tones of roleA and roleB, as described above.
-   * @param stayTogether Whether these two roles should stay on the same side of the "awkward zone"
-   *     (T50-59). This is necessary for certain cases where one role has two backgrounds.
-   */
-  public ToneDeltaPair(
-      DynamicColor roleA,
-      DynamicColor roleB,
-      double delta,
-      TonePolarity polarity,
-      boolean stayTogether) {
-    this.roleA = roleA;
-    this.roleB = roleB;
-    this.delta = delta;
-    this.polarity = polarity;
-    this.stayTogether = stayTogether;
-  }
+    /**
+     * Documents a constraint in tone distance between two DynamicColors.
+     *
+     * <p>The polarity is an adjective that describes "A", compared to "B".
+     *
+     * <p>For instance, ToneDeltaPair(A, B, 15, 'darker', stayTogether) states that A's tone should be
+     * at least 15 darker than B's.
+     *
+     * <p>'nearer' and 'farther' describes closeness to the surface roles. For instance,
+     * ToneDeltaPair(A, B, 10, 'nearer', stayTogether) states that A should be 10 lighter than B in
+     * light mode, and 10 darker than B in dark mode.
+     *
+     * @param roleA        The first role in a pair.
+     * @param roleB        The second role in a pair.
+     * @param delta        Required difference between tones. Absolute value, negative values have undefined
+     *                     behavior.
+     * @param polarity     The relative relation between tones of roleA and roleB, as described above.
+     * @param stayTogether Whether these two roles should stay on the same side of the "awkward zone"
+     *                     (T50-59). This is necessary for certain cases where one role has two backgrounds.
+     */
+    public ToneDeltaPair(
+            DynamicColor roleA,
+            DynamicColor roleB,
+            double delta,
+            TonePolarity polarity,
+            boolean stayTogether) {
+        this.roleA = roleA;
+        this.roleB = roleB;
+        this.delta = delta;
+        this.polarity = polarity;
+        this.stayTogether = stayTogether;
+    }
 
-  @NonNull
-  public DynamicColor getRoleA() {
-    return roleA;
-  }
+    @NonNull
+    public DynamicColor getRoleA() {
+        return roleA;
+    }
 
-  @NonNull
-  public DynamicColor getRoleB() {
-    return roleB;
-  }
+    @NonNull
+    public DynamicColor getRoleB() {
+        return roleB;
+    }
 
-  public double getDelta() {
-    return delta;
-  }
+    public double getDelta() {
+        return delta;
+    }
 
-  @NonNull
-  public TonePolarity getPolarity() {
-    return polarity;
-  }
+    @NonNull
+    public TonePolarity getPolarity() {
+        return polarity;
+    }
 
-  public boolean getStayTogether() {
-    return stayTogether;
-  }
+    public boolean getStayTogether() {
+        return stayTogether;
+    }
 }
