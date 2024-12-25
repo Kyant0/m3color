@@ -20,6 +20,10 @@ import androidx.annotation.NonNull;
 import com.kyant.m3color.dislike.DislikeAnalyzer;
 import com.kyant.m3color.hct.Hct;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
+
 /**
  * Named colors, otherwise known as tokens, or roles, in the Material Design system.
  */
@@ -935,6 +939,73 @@ public final class MaterialDynamicColors {
     public DynamicColor textHintInverse() {
         return DynamicColor.fromPalette(
                 "text_hint_inverse", (s) -> s.neutralPalette, (s) -> s.isDark ? 10.0 : 90.0);
+    }
+
+    /** All dynamic colors in Material Design system. */
+    public final List<Supplier<DynamicColor>> allDynamicColors() {
+        return Arrays.asList(
+                this::primaryPaletteKeyColor,
+                this::secondaryPaletteKeyColor,
+                this::tertiaryPaletteKeyColor,
+                this::neutralPaletteKeyColor,
+                this::neutralVariantPaletteKeyColor,
+                this::background,
+                this::onBackground,
+                this::surface,
+                this::surfaceDim,
+                this::surfaceBright,
+                this::surfaceContainerLowest,
+                this::surfaceContainerLow,
+                this::surfaceContainer,
+                this::surfaceContainerHigh,
+                this::surfaceContainerHighest,
+                this::onSurface,
+                this::surfaceVariant,
+                this::onSurfaceVariant,
+                this::inverseSurface,
+                this::inverseOnSurface,
+                this::outline,
+                this::outlineVariant,
+                this::shadow,
+                this::scrim,
+                this::surfaceTint,
+                this::primary,
+                this::onPrimary,
+                this::primaryContainer,
+                this::onPrimaryContainer,
+                this::inversePrimary,
+                this::secondary,
+                this::onSecondary,
+                this::secondaryContainer,
+                this::onSecondaryContainer,
+                this::tertiary,
+                this::onTertiary,
+                this::tertiaryContainer,
+                this::onTertiaryContainer,
+                this::error,
+                this::onError,
+                this::errorContainer,
+                this::onErrorContainer,
+                this::primaryFixed,
+                this::primaryFixedDim,
+                this::onPrimaryFixed,
+                this::onPrimaryFixedVariant,
+                this::secondaryFixed,
+                this::secondaryFixedDim,
+                this::onSecondaryFixed,
+                this::onSecondaryFixedVariant,
+                this::tertiaryFixed,
+                this::tertiaryFixedDim,
+                this::onTertiaryFixed,
+                this::onTertiaryFixedVariant,
+                this::controlActivated,
+                this::controlNormal,
+                this::controlHighlight,
+                this::textPrimaryInverse,
+                this::textSecondaryAndTertiaryInverse,
+                this::textPrimaryInverseDisableOnly,
+                this::textSecondaryAndTertiaryInverseDisabled,
+                this::textHintInverse);
     }
 
     private boolean isFidelity(DynamicScheme scheme) {
