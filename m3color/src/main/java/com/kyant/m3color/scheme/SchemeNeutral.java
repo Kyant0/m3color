@@ -15,25 +15,51 @@
  */
 package com.kyant.m3color.scheme;
 
+import static com.kyant.m3color.dynamiccolor.DynamicScheme.Platform.PHONE;
+
+import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
+import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
 import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.palettes.TonalPalette;
 
 /**
  * A theme that's slightly more chromatic than monochrome, which is purely black / white / gray.
  */
 public class SchemeNeutral extends DynamicScheme {
+
+    private static final SpecVersion DEFAULT_SPEC_VERSION = SpecVersion.SPEC_2021;
+    private static final Platform DEFAULT_PLATFORM = PHONE;
+
     public SchemeNeutral(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+        this(sourceColorHct, isDark, contrastLevel, DEFAULT_SPEC_VERSION, DEFAULT_PLATFORM);
+    }
+
+    public SchemeNeutral(
+            Hct sourceColorHct,
+            boolean isDark,
+            double contrastLevel,
+            SpecVersion specVersion,
+            Platform platform) {
         super(
                 sourceColorHct,
                 Variant.NEUTRAL,
                 isDark,
                 contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 12.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 8.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 2.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 2.0));
+                platform,
+                specVersion,
+                ColorSpecs.get(specVersion)
+                        .getPrimaryPalette(Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getSecondaryPalette(Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getTertiaryPalette(Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getNeutralPalette(Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getNeutralVariantPalette(
+                                Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getErrorPalette(Variant.NEUTRAL, sourceColorHct, isDark, platform, contrastLevel));
     }
 }

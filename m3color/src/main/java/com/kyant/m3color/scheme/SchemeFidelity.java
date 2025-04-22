@@ -16,12 +16,13 @@
 
 package com.kyant.m3color.scheme;
 
-import com.kyant.m3color.dislike.DislikeAnalyzer;
+import static com.kyant.m3color.dynamiccolor.DynamicScheme.Platform.PHONE;
+
+import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
+import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
 import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.palettes.TonalPalette;
-import com.kyant.m3color.temperature.TemperatureCache;
 
 /**
  * A scheme that places the source color in Scheme.primaryContainer.
@@ -40,14 +41,18 @@ public class SchemeFidelity extends DynamicScheme {
                 Variant.FIDELITY,
                 isDark,
                 contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma()),
-                TonalPalette.fromHueAndChroma(
-                        sourceColorHct.getHue(),
-                        Math.max(sourceColorHct.getChroma() - 32.0, sourceColorHct.getChroma() * 0.5)),
-                TonalPalette.fromHct(
-                        DislikeAnalyzer.fixIfDisliked(new TemperatureCache(sourceColorHct).getComplement())),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), sourceColorHct.getChroma() / 8.0),
-                TonalPalette.fromHueAndChroma(
-                        sourceColorHct.getHue(), (sourceColorHct.getChroma() / 8.0) + 4.0));
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getPrimaryPalette(Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getSecondaryPalette(Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getTertiaryPalette(Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralPalette(Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralVariantPalette(
+                                Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getErrorPalette(Variant.FIDELITY, sourceColorHct, isDark, PHONE, contrastLevel));
     }
 }

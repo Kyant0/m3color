@@ -15,11 +15,11 @@
  */
 package com.kyant.m3color.scheme;
 
+import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
+import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
 import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.palettes.TonalPalette;
-import com.kyant.m3color.utils.MathUtils;
 
 /**
  * A playful theme - the source color's hue does not appear in the theme.
@@ -31,11 +31,23 @@ public class SchemeRainbow extends DynamicScheme {
                 Variant.RAINBOW,
                 isDark,
                 contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 48.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 16.0),
-                TonalPalette.fromHueAndChroma(
-                        MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 60.0), 24.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getPrimaryPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getSecondaryPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getTertiaryPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralVariantPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getErrorPalette(
+                                Variant.RAINBOW, sourceColorHct, isDark, Platform.PHONE, contrastLevel));
     }
 }

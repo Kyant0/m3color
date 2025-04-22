@@ -16,10 +16,13 @@
 
 package com.kyant.m3color.scheme;
 
+import static com.kyant.m3color.dynamiccolor.DynamicScheme.Platform.PHONE;
+
+import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
+import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
 import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
-import com.kyant.m3color.palettes.TonalPalette;
 
 /**
  * A monochrome theme, colors are purely black / white / gray.
@@ -31,10 +34,18 @@ public class SchemeMonochrome extends DynamicScheme {
                 Variant.MONOCHROME,
                 isDark,
                 contrastLevel,
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0),
-                TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 0.0));
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getPrimaryPalette(Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getSecondaryPalette(Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getTertiaryPalette(Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralPalette(Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getNeutralVariantPalette(
+                                Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel),
+                ColorSpecs.get(SpecVersion.SPEC_2021)
+                        .getErrorPalette(Variant.MONOCHROME, sourceColorHct, isDark, PHONE, contrastLevel));
     }
 }
