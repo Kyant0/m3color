@@ -16,8 +16,6 @@
 
 package com.kyant.m3color.scheme;
 
-import static com.kyant.m3color.dynamiccolor.DynamicScheme.Platform.PHONE;
-
 import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
 import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
@@ -28,9 +26,6 @@ import com.kyant.m3color.hct.Hct;
  * A playful theme - the source color's hue does not appear in the theme.
  */
 public class SchemeExpressive extends DynamicScheme {
-
-    private static final SpecVersion DEFAULT_SPEC_VERSION = SpecVersion.SPEC_2021;
-    private static final Platform DEFAULT_PLATFORM = PHONE;
 
     public SchemeExpressive(Hct sourceColorHct, boolean isDark, double contrastLevel) {
         this(sourceColorHct, isDark, contrastLevel, DEFAULT_SPEC_VERSION, DEFAULT_PLATFORM);

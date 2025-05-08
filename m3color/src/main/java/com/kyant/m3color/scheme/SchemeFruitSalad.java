@@ -15,8 +15,6 @@
  */
 package com.kyant.m3color.scheme;
 
-import static com.kyant.m3color.dynamiccolor.DynamicScheme.Platform.PHONE;
-
 import com.kyant.m3color.dynamiccolor.ColorSpec.SpecVersion;
 import com.kyant.m3color.dynamiccolor.ColorSpecs;
 import com.kyant.m3color.dynamiccolor.DynamicScheme;
@@ -27,24 +25,40 @@ import com.kyant.m3color.hct.Hct;
  * A playful theme - the source color's hue does not appear in the theme.
  */
 public class SchemeFruitSalad extends DynamicScheme {
+
     public SchemeFruitSalad(Hct sourceColorHct, boolean isDark, double contrastLevel) {
+        this(sourceColorHct, isDark, contrastLevel, DEFAULT_SPEC_VERSION, DEFAULT_PLATFORM);
+    }
+
+    public SchemeFruitSalad(
+            Hct sourceColorHct,
+            boolean isDark,
+            double contrastLevel,
+            SpecVersion specVersion,
+            Platform platform) {
         super(
                 sourceColorHct,
                 Variant.FRUIT_SALAD,
                 isDark,
                 contrastLevel,
-                ColorSpecs.get(SpecVersion.SPEC_2021)
-                        .getPrimaryPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel),
-                ColorSpecs.get(SpecVersion.SPEC_2021)
-                        .getSecondaryPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel),
-                ColorSpecs.get(SpecVersion.SPEC_2021)
-                        .getTertiaryPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel),
-                ColorSpecs.get(SpecVersion.SPEC_2021)
-                        .getNeutralPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel),
-                ColorSpecs.get(SpecVersion.SPEC_2021)
+                platform,
+                specVersion,
+                ColorSpecs.get(specVersion)
+                        .getPrimaryPalette(
+                                Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getSecondaryPalette(
+                                Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getTertiaryPalette(
+                                Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getNeutralPalette(
+                                Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
                         .getNeutralVariantPalette(
-                                Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel),
-                ColorSpecs.get(SpecVersion.SPEC_2021)
-                        .getErrorPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, PHONE, contrastLevel));
+                                Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel),
+                ColorSpecs.get(specVersion)
+                        .getErrorPalette(Variant.FRUIT_SALAD, sourceColorHct, isDark, platform, contrastLevel));
     }
 }
