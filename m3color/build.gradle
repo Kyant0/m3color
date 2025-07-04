@@ -4,19 +4,21 @@ plugins {
 }
 
 group = 'com.kyant'
-version = '2025.3'
-
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
+version = '2025.4'
 
 repositories {
     google()
     mavenCentral()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
 dependencies {
     implementation('androidx.annotation:annotation:1.9.1')
-    implementation('com.google.errorprone:error_prone_annotations:2.38.0')
+    implementation('com.google.errorprone:error_prone_annotations:2.39.0')
 }
 
 afterEvaluate {
@@ -25,7 +27,7 @@ afterEvaluate {
             maven(MavenPublication) {
                 groupId = 'com.kyant'
                 artifactId = 'm3color'
-                version = '2025.3'
+                version = '2025.4'
                 from components.java
             }
         }
