@@ -22,6 +22,9 @@ import com.kyant.m3color.dynamiccolor.DynamicScheme;
 import com.kyant.m3color.dynamiccolor.Variant;
 import com.kyant.m3color.hct.Hct;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * A monochrome theme, colors are purely black / white / gray.
  */
@@ -37,27 +40,44 @@ public class SchemeMonochrome extends DynamicScheme {
             double contrastLevel,
             SpecVersion specVersion,
             Platform platform) {
+        this(Collections.singletonList(sourceColorHct), isDark, contrastLevel, specVersion, platform);
+    }
+
+    public SchemeMonochrome(List<Hct> sourceColorHctList, boolean isDark, double contrastLevel) {
+        this(sourceColorHctList, isDark, contrastLevel, DEFAULT_SPEC_VERSION, DEFAULT_PLATFORM);
+    }
+
+    public SchemeMonochrome(
+            List<Hct> sourceColorHctList,
+            boolean isDark,
+            double contrastLevel,
+            SpecVersion specVersion,
+            Platform platform) {
         super(
-                sourceColorHct,
+                sourceColorHctList,
                 Variant.MONOCHROME,
                 isDark,
                 contrastLevel,
                 platform,
                 specVersion,
                 ColorSpecs.get(specVersion)
-                        .getPrimaryPalette(Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel),
+                        .getPrimaryPalette(
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel),
                 ColorSpecs.get(specVersion)
                         .getSecondaryPalette(
-                                Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel),
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel),
                 ColorSpecs.get(specVersion)
                         .getTertiaryPalette(
-                                Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel),
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel),
                 ColorSpecs.get(specVersion)
-                        .getNeutralPalette(Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel),
+                        .getNeutralPalette(
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel),
                 ColorSpecs.get(specVersion)
                         .getNeutralVariantPalette(
-                                Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel),
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel),
                 ColorSpecs.get(specVersion)
-                        .getErrorPalette(Variant.MONOCHROME, sourceColorHct, isDark, platform, contrastLevel));
+                        .getErrorPalette(
+                                Variant.MONOCHROME, sourceColorHctList.get(0), isDark, platform, contrastLevel));
     }
 }
+

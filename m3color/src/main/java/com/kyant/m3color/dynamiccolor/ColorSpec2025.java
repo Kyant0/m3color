@@ -44,7 +44,7 @@ import java.util.Optional;
 /**
  * {@link ColorSpec} implementation for the 2025 spec.
  */
-final class ColorSpec2025 extends ColorSpec2021 {
+class ColorSpec2025 extends ColorSpec2021 {
 
     ////////////////////////////////////////////////////////////////
     // Surfaces [S]                                               //
@@ -65,9 +65,13 @@ final class ColorSpec2025 extends ColorSpec2021 {
     @Override
     public DynamicColor onBackground() {
         // Remapped to onSurface for 2025 spec.
-        DynamicColor color2025 = onSurface().toBuilder().setName("on_background").build();
+        DynamicColor.Builder color2025Builder = onSurface().toBuilder().setName("on_background");
+        color2025Builder.setTone(
+                (s) -> {
+                    return s.platform == WATCH ? 100.0 : onSurface().getTone(s);
+                });
         return super.onBackground().toBuilder()
-                .extendSpecVersion(SpecVersion.SPEC_2025, color2025)
+                .extendSpecVersion(SpecVersion.SPEC_2025, color2025Builder.build())
                 .build();
     }
 
@@ -428,7 +432,8 @@ final class ColorSpec2025 extends ColorSpec2021 {
                                         return surfaceContainerHigh();
                                     }
                                 })
-                        .setContrastCurve((s) -> s.isDark ? getContrastCurve(11) : getContrastCurve(9))
+                        .setContrastCurve(
+                                (s) -> s.isDark && s.platform == PHONE ? getContrastCurve(11) : getContrastCurve(9))
                         .build();
         return super.onSurface().toBuilder()
                 .extendSpecVersion(SpecVersion.SPEC_2025, color2025)
@@ -475,7 +480,10 @@ final class ColorSpec2025 extends ColorSpec2021 {
                                     }
                                 })
                         .setContrastCurve(
-                                (s) -> s.platform == PHONE ? getContrastCurve(4.5) : getContrastCurve(7))
+                                (s) ->
+                                        s.platform == PHONE
+                                                ? (s.isDark ? getContrastCurve(6) : getContrastCurve(4.5))
+                                                : getContrastCurve(7))
                         .build();
         return super.onSurfaceVariant().toBuilder()
                 .extendSpecVersion(SpecVersion.SPEC_2025, color2025)
@@ -623,15 +631,23 @@ final class ColorSpec2025 extends ColorSpec2021 {
                                             return tMaxC(s.primaryPalette, 0, 90);
                                         }
                                     } else if (s.variant == EXPRESSIVE) {
-                                        return tMaxC(
-                                                s.primaryPalette,
-                                                0,
-                                                Hct.isYellow(s.primaryPalette.getHue())
-                                                        ? 25
-                                                        : Hct.isCyan(s.primaryPalette.getHue()) ? 88 : 98);
+                                        if (s.platform == PHONE) {
+                                            return tMaxC(
+                                                    s.primaryPalette,
+                                                    0,
+                                                    Hct.isYellow(s.primaryPalette.getHue())
+                                                            ? 25
+                                                            : Hct.isCyan(s.primaryPalette.getHue()) ? 88 : 98);
+                                        } else { // WATCH
+                                            return tMaxC(s.primaryPalette);
+                                        }
                                     } else { // VIBRANT
-                                        return tMaxC(
-                                                s.primaryPalette, 0, Hct.isCyan(s.primaryPalette.getHue()) ? 88 : 98);
+                                        if (s.platform == PHONE) {
+                                            return tMaxC(
+                                                    s.primaryPalette, 0, Hct.isCyan(s.primaryPalette.getHue()) ? 88 : 98);
+                                        } else { // WATCH
+                                            return tMaxC(s.primaryPalette);
+                                        }
                                     }
                                 })
                         .setIsBackground(true)
@@ -1535,7 +1551,7 @@ final class ColorSpec2025 extends ColorSpec2021 {
 
     private static ContrastCurve getContrastCurve(double defaultContrast) {
         if (defaultContrast == 1.5) {
-            return new ContrastCurve(1.5, 1.5, 3, 4.5);
+            return new ContrastCurve(1.5, 1.5, 3, 5.5);
         } else if (defaultContrast == 3) {
             return new ContrastCurve(3, 3, 4.5, 7);
         } else if (defaultContrast == 4.5) {
@@ -1572,12 +1588,17 @@ final class ColorSpec2025 extends ColorSpec2021 {
         // "recover" intended chroma as contrast increases.
         TonalPalette palette = color.palette.apply(scheme);
         double tone = getTone(scheme, color);
-        double hue = palette.getHue();
         double chromaMultiplier =
-                color.chromaMultiplier == null ? 1 : color.chromaMultiplier.apply(scheme);
-        double chroma = palette.getChroma() * chromaMultiplier;
+                color.chromaMultiplier == null ? 1.0 : color.chromaMultiplier.apply(scheme);
+        if (chromaMultiplier == 1.0) {
+            return palette.getHct(tone);
+        }
 
-        return Hct.from(hue, chroma, tone);
+        double chroma = palette.getChroma() * chromaMultiplier;
+        if (tone == 99.0 && Hct.isYellow(palette.getHue())) {
+            return TonalPalette.fromHueAndChroma(palette.getHue(), chroma).getHct(tone);
+        }
+        return Hct.from(palette.getHue(), chroma, tone);
     }
 
     @Override
@@ -1606,10 +1627,8 @@ final class ColorSpec2025 extends ColorSpec2021 {
             double relativeDelta = absoluteDelta * (amRoleA ? 1 : -1);
 
             switch (constraint) {
-                case EXACT:
-                    selfTone = MathUtils.clampDouble(0, 100, referenceTone + relativeDelta);
-                    break;
-                case NEARER:
+                case EXACT -> selfTone = MathUtils.clampDouble(0, 100, referenceTone + relativeDelta);
+                case NEARER -> {
                     if (relativeDelta > 0) {
                         selfTone =
                                 MathUtils.clampDouble(
@@ -1623,14 +1642,14 @@ final class ColorSpec2025 extends ColorSpec2021 {
                                         100,
                                         MathUtils.clampDouble(referenceTone + relativeDelta, referenceTone, selfTone));
                     }
-                    break;
-                case FARTHER:
+                }
+                case FARTHER -> {
                     if (relativeDelta > 0) {
                         selfTone = MathUtils.clampDouble(referenceTone + relativeDelta, 100, selfTone);
                     } else {
                         selfTone = MathUtils.clampDouble(0, referenceTone + relativeDelta, selfTone);
                     }
-                    break;
+                }
             }
 
             if (color.background != null && color.contrastCurve != null) {
@@ -1860,13 +1879,15 @@ final class ColorSpec2025 extends ColorSpec2021 {
             Platform platform,
             double contrastLevel) {
         switch (variant) {
-            case NEUTRAL:
+            case NEUTRAL -> {
                 return TonalPalette.fromHueAndChroma(
                         sourceColorHct.getHue(), (platform == PHONE ? 1.4 : 6) * 2.2);
-            case TONAL_SPOT:
+            }
+            case TONAL_SPOT -> {
                 return TonalPalette.fromHueAndChroma(
                         sourceColorHct.getHue(), (platform == PHONE ? 5 : 10) * 1.7);
-            case EXPRESSIVE:
+            }
+            case EXPRESSIVE -> {
                 double expressiveNeutralHue = getExpressiveNeutralHue(sourceColorHct);
                 double expressiveNeutralChroma =
                         getExpressiveNeutralChroma(sourceColorHct, isDark, platform);
@@ -1874,13 +1895,16 @@ final class ColorSpec2025 extends ColorSpec2021 {
                         expressiveNeutralHue,
                         expressiveNeutralChroma
                                 * (expressiveNeutralHue >= 105 && expressiveNeutralHue < 125 ? 1.6 : 2.3));
-            case VIBRANT:
+            }
+            case VIBRANT -> {
                 double vibrantNeutralHue = getVibrantNeutralHue(sourceColorHct);
                 double vibrantNeutralChroma = getVibrantNeutralChroma(sourceColorHct, platform);
                 return TonalPalette.fromHueAndChroma(vibrantNeutralHue, vibrantNeutralChroma * 1.29);
-            default:
+            }
+            default -> {
                 return super.getNeutralVariantPalette(
                         variant, sourceColorHct, isDark, platform, contrastLevel);
+            }
         }
     }
 

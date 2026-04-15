@@ -19,6 +19,7 @@ package com.kyant.m3color.hct;
 import static java.lang.Math.max;
 
 import com.kyant.m3color.utils.ColorUtils;
+import com.kyant.m3color.utils.MathUtils;
 
 /**
  * CAM16, a color appearance model. Colors are not just defined by their hex code, but rather, a hex
@@ -258,10 +259,7 @@ public final class Cam16 {
         // hue
         double atan2 = Math.atan2(b, a);
         double atanDegrees = Math.toDegrees(atan2);
-        double hue =
-                atanDegrees < 0
-                        ? atanDegrees + 360.0
-                        : atanDegrees >= 360 ? atanDegrees - 360.0 : atanDegrees;
+        double hue = MathUtils.sanitizeDegreesDouble(atanDegrees);
         double hueRadians = Math.toRadians(hue);
 
         // achromatic response to color

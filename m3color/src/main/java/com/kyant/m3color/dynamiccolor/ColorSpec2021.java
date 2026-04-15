@@ -1313,6 +1313,8 @@ class ColorSpec2021 implements ColorSpec {
             case EXPRESSIVE -> TonalPalette.fromHueAndChroma(
                     MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 240), 40);
             case VIBRANT -> TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 200.0);
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 
@@ -1346,6 +1348,8 @@ class ColorSpec2021 implements ColorSpec {
                             new double[]{0, 41, 61, 101, 131, 181, 251, 301, 360},
                             new double[]{18, 15, 10, 12, 15, 18, 15, 12, 12}),
                     24.0);
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 
@@ -1382,6 +1386,8 @@ class ColorSpec2021 implements ColorSpec {
                             new double[]{0, 41, 61, 101, 131, 181, 251, 301, 360},
                             new double[]{35, 30, 20, 25, 30, 35, 30, 25, 25}),
                     32.0);
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 
@@ -1404,6 +1410,8 @@ class ColorSpec2021 implements ColorSpec {
             case EXPRESSIVE -> TonalPalette.fromHueAndChroma(
                     MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 15), 8);
             case VIBRANT -> TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 10);
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 
@@ -1428,6 +1436,8 @@ class ColorSpec2021 implements ColorSpec {
             case EXPRESSIVE -> TonalPalette.fromHueAndChroma(
                     MathUtils.sanitizeDegreesDouble(sourceColorHct.getHue() + 15), 12);
             case VIBRANT -> TonalPalette.fromHueAndChroma(sourceColorHct.getHue(), 12);
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 
@@ -1449,6 +1459,8 @@ class ColorSpec2021 implements ColorSpec {
                  TONAL_SPOT,
                  EXPRESSIVE,
                  VIBRANT -> Optional.empty();
+            default -> throw new IllegalArgumentException(
+                    variant + " variant is not supported in current spec.");
         };
     }
 }
